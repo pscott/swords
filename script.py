@@ -1,25 +1,33 @@
 username = raw_input("What's your name? ")
 coins = 1000
+knife_price = 5
+axe_price = 12
+sword_price = 15
 
 print "\nYou've got %s gold coins remaining %s.\n" % (coins, username)
 print "Let's go through the weapons I sell one by one:"
 
 print "How many knives would you like to buy?"
-knives = int(input('5 gold per knife: '))
+num_knives = int(input('%s gold per knife: ' % knife_price))
 
 print "How many axes would you like to buy?"
-axes = int(input('12 gold per axe: '))
+num_axes = int(input('%s gold per axe: ' % axe_price))
 
 print "How many swords would you like to buy?"
-swords = int(input('15 gold per sword: '))
+num_swords = int(input('%s gold per sword: ' % sword_price))
 
-print "Ok, you want to buy %s knives, %s axes and %s swords." % (knives, axes, swords)
+print "Ok, you want to buy %s knives, %s axes and %s swords." % (num_knives, num_axes, num_swords)
 
-def buy(knives, axes, swords):
-    cost = knives + swords + axes
-    print "Sooo... That'll be %s gold coins." % cost
-    coins_left = coins - cost
-    print "You've got %s coins left %s.\n" % (coins_left, username)
+def compute_cost(num_knives, num_axes, num_swords):
+    cost = num_knives * knife_price + num_swords * sword_price + num_axes * axe_price
+    return cost
 
-buy(knives * 5, axes * 12, swords * 15)
+def remainder(initial_coins, purchase_cost):
+    return initial_coins - purchase_cost
+
+purchase_cost = compute_cost(num_knives, num_axes, num_swords)
+print "Sooo... That'll be %s gold coins." % purchase_cost
+
+coins_left = remainder(coins, purchase_cost)
+print "You've got %s coins left %s.\n" % (coins_left, username)
 print "Thanks for stopping by!"
