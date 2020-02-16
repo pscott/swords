@@ -18,24 +18,27 @@ def main(name):
 def commands(name):
     fail = "\nCome on, this is quite simple. Just follow the instructions in the prompt.\n"
     wake = "YOU GOTTA WAKE UP!"
+    curr_prompt = "Type \"dodge\" to avoid getting punched.\n"
     punch_dodged = False
     man_ko = False
     at_car = False
     car_opened = False
     cigarettes_found = False
     while True:
+        print curr_prompt
         choice = raw_input("> ").lower()
 
         if "dodge" in choice:
             punch_dodged = True
             print "\nThe drunk man misses and stumbles.\n"
-            print "You hear Joe's voice: \"Nice! Now strike him with one of those nasty upercuts you got!\"\n\nType \"attack\" to strike.\n"
+            print "You hear Joe's voice: \"Nice! Now strike him with one of those nasty upercuts you got!\"\n"
+            curr_prompt = "Type \"attack\" to strike.\n"
         elif "attack" in choice and punch_dodged:
             man_ko = True
             print "\nYou hit him so hard he instantly gets knocked out and falls to the ground.\n"
             print "After this roughed up \"conversation\", you need a cigarette. But where are they?\n"
             print "You can't find them on you so you tell your co-workers you're going to look for them in your car.\n"
-            print "Type \"go to PLACE\" to move the character to the car.\n"
+            curr_prompt = "Type \"go to PLACE\" to move the character to the car.\n"
         elif "go to" in choice and "car" in choice and punch_dodged and man_ko:
             at_car = True
             print "\nType \"open PLACE\" to open your car.\n"
@@ -43,16 +46,16 @@ def commands(name):
             car_opened = True 
             print "\nYou open the car, searching for the cigarette pack."
             print "\nYou now remember your cigarettes are in the glovebox."
-            print "\nType \"search PLACE\" to search.\n"
+            curr_prompt = "\nType \"search PLACE\" to search.\n"
         elif "open" in choice and "trunk" in choice and punch_dodged and man_ko and at_car:
             print "\nThe trunk is closed and you know for sure the cigarettes are in the car."
         elif "search" in choice and "glovebox" in choice and punch_dodged and man_ko and at_car and car_opened:
             cigarettes_found = True
             print "\nYou find the cigarettes."
-            print "\nType \"grab\" to grab the cigarettes and light one.\n" 
+            curr_prompt = "\nType \"grab\" to grab the cigarettes and light one.\n" 
         elif "search" in choice and "trunk" in choice and punch_dodged and man_ko and at_car and car_opened:
             print "\nThe trunk is closed and you know for sure the cigarettes are in the glovebox.\n"
-            print "Type \"search PLACE\" to search."
+            curr_prompt = "Type \"search PLACE\" to search."
         elif "grab" in choice and punch_dodged and man_ko and at_car and cigarettes_found:
             print "\nYou light a cigarette."
             print "As you inhale the smoke you ease up a little. \"This job sucks.\" you think to yourself.\n"
@@ -72,27 +75,8 @@ def commands(name):
             print "A twisted smile appears on his face as he screams louder and louder:\n\"YOU GOTTA WAKE UP!\"\n\n"
             print "He starts vigorously agitating his arms and starts lascerating you while repeatidly shouting:\n\n\"%s %s %s\"\n\n" % (wake, wake, wake)
             main(name)
-        elif not "attack" in choice and punch_dodged:
-            print "%s" % fail
-            print "Type \"attack\" to strike.\n"
-        elif not "go to" in choice and punch_dodged and man_ko:
-            print "But WHERE do you want to go?"
-            print "%s" % fail
-            print "Type \"go to PLACE\" to go to the car.\n"
-        elif "go to" in choice and "club" in choice and punch_dodged and man_ko:
-            print "This is not the time!"
-            print "%s" % fail
-            print "Type \"go to PLACE\" to go to the car.\n"
-        elif not "open" in choice and (not "car" in choice or "door" in choice) and punch_dodged and man_ko and at_car:
-            print "%s" % fail
-            print "Type \"open PLACE\" to open the car.\n"
-        elif not "search" in choice and not "glovebox" in choice and punch_dodged and man_ko and at_car and car_opened:
-            print "%s" % fail
-            print "Type \"search PLACE\" to search.\n" 
         else:
-            print "\nThe man hits you with a hard punch and aims for another one."
-            print "%s" % fail
-            print "Type \"dodge\" to avoid getting punched.\n"
+            print fail
 
 def dream():
     print """\n\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\n\nOn a late thursday night in front of the Shogun club were you work as a bouncer, a guy who obviously has had too many drinks starts being aggressive with you.\nHe drunkenly asks you:\n\n"What's your name buddy?"\n """
@@ -107,7 +91,6 @@ def dream():
     scroll = raw_input("\nPress ENTER KEY to keep scrolling.\n\n> ")
     print "\nYou've apparently made him mad, and he clumsily tries to punch you.\n"
     print "At that moment, you remember Joe, your gym trainer, back in your boxing career days, screaming at you while fighting in the ring: \"Dodge the first blow %s!\"\n" % name
-    print "Type \"dodge\" to avoid getting punched.\n"
     commands(name)
 
 
