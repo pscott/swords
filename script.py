@@ -41,18 +41,18 @@ def commands(name):
             curr_prompt = "Type \"go to PLACE\" to move the character to the car.\n"
         elif "go to" in choice and "car" in choice and punch_dodged and man_ko:
             at_car = True
-            print "\nType \"open PLACE\" to open your car.\n"
+            curr_prompt = "Type \"open PLACE\" to open your car.\n"
         elif "open" in choice and ("car" in choice or "door" in choice or "car door" in choice) and punch_dodged and man_ko and at_car:
             car_opened = True 
             print "\nYou open the car, searching for the cigarette pack."
             print "\nYou now remember your cigarettes are in the glovebox."
-            curr_prompt = "\nType \"search PLACE\" to search.\n"
+            curr_prompt = "Type \"search PLACE\" to search.\n"
         elif "open" in choice and "trunk" in choice and punch_dodged and man_ko and at_car:
             print "\nThe trunk is closed and you know for sure the cigarettes are in the car."
         elif "search" in choice and "glovebox" in choice and punch_dodged and man_ko and at_car and car_opened:
             cigarettes_found = True
             print "\nYou find the cigarettes."
-            curr_prompt = "\nType \"grab\" to grab the cigarettes and light one.\n" 
+            curr_prompt = "Type \"grab\" to grab the cigarettes and light one.\n" 
         elif "search" in choice and "trunk" in choice and punch_dodged and man_ko and at_car and car_opened:
             print "\nThe trunk is closed and you know for sure the cigarettes are in the glovebox.\n"
             curr_prompt = "Type \"search PLACE\" to search."
